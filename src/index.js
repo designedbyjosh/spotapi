@@ -3,7 +3,12 @@
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http, { path: '/ws' })
+const io = require('socket.io')(http, {
+    cors: {
+      origin: '*',
+    },
+    path: "/ws"
+  })
 
 // Custom logging library
 const logger = require('./logger')
