@@ -1,0 +1,30 @@
+{
+  "name": "spotapi",
+  "version": "1.0.0",
+  "description": "An API that connects to the Spotify API, tracks your personal listening habits and publishes them through an API. Useful if you want to make your listening habits public like on a personal blog or on a dashboard.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/designedbyjosh/spotapi.git"
+  },
+  "author": "Josh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/designedbyjosh/spotapi/issues"
+  },
+  "homepage": "https://github.com/designedbyjosh/spotapi#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "jest": "^24.7.1",
+    "moment": "^2.24.0",
+    "socket.io": "^2.2.0",
+    "spotify-web-api-node": "^4.0.0",
+    "winston": "^3.2.1"
+  }
+}
