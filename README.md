@@ -13,9 +13,7 @@
     <a href="https://josh.house/music"><strong>Check out my habits »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/designedbyjosh">My GitHub</a>
-    ·
-    <a href="https://spotify.com">My most-used app</a>
+    <a href="https://dockerhub.com/jbwhitcombe/spotapi"><img src="https://github.com/designedbyjosh/spotapi/actions/workflows/docker-image.yml/badge.svg"></a>
   </p>
 </p>
 
