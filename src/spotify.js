@@ -8,9 +8,9 @@ var top_artists;
 var top_tracks;
 var loop;
 
-// Read the environment file
-const dotenv = require('dotenv');
-dotenv.config();
+// // Read the environment file
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 /*  
     A client ID and a client secret are required for usage of this library, 
@@ -25,7 +25,7 @@ var spotifyApi = new SpotifyWebApi({
 
 // Create the authorization URL
 logger.info(spotifyApi.createAuthorizeURL(['user-library-read', 'user-top-read', 'user-read-playback-state', 'user-read-currently-playing']))
-logger.info("Please patch the received code to /code to commence searching")
+logger.info("Please POST the received code to /code to commence searching")
 
 const poll = (code) => {
 
@@ -42,10 +42,12 @@ const poll = (code) => {
 
         loop = setInterval(async () => {
 
+            // Get information about the top tracks for the signed in user
             top_tracks = await spotifyApi.getMyTopTracks()
                 .then((data) => data.body)
                 .catch((err) => logger.error('Something went wrong retrieving top tracks: ', err));
 
+            // Get information about the top artists for the signed in user
             top_artists = await spotifyApi.getMyTopArtists()
                 .then((data) => data.body)
                 .catch((err) => logger.error('Something went wrong retrieving top artists: ', err));

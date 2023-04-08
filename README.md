@@ -24,11 +24,30 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-- [About The Project](#about-the-project)
+- [Installation](#installation)
 - [Contributing](#contributing)
 - [License](#license)
 
+## Installation
+Getting started is easy, run:
 
+```sh
+docker build . --tag spotapi:latest
+```
+
+And then to run the container you've built, run:
+
+```sh
+docker run -e SPOTIFY_ID="a_good_secret" -e SPOTIFY_SECRET="an_even_better_secret" -e SPOTIFY_REDIRECT_URI="https://your.awesome.website" spotapi:latest
+```
+
+You'll need to then either manually POST the code to /code with:
+
+```sh
+curl --location --request POST 'localhost:80/code?code=$CODE'
+```
+
+Once you've completed the code transfer, you won't need to do this again until the service restarts.
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
