@@ -13,7 +13,7 @@
     <a href="https://josh.house/music"><strong>Check out my habits »</strong></a>
     <br />
     <br />
-    <a href="https://dockerhub.com/jbwhitcombe/spotapi"><img src="https://github.com/designedbyjosh/spotapi/actions/workflows/docker-image.yml/badge.svg"></a>
+    <a href="https://hub.docker.com/repository/docker/jbwhitcombe/spotapi/general"><img src="https://github.com/designedbyjosh/spotapi/actions/workflows/docker-image.yml/badge.svg"></a>
   </p>
 </p>
 
