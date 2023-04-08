@@ -1,6 +1,6 @@
 {
   "name": "spotapi",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "An API that connects to the Spotify API, tracks your personal listening habits and publishes them through an API. Useful if you want to make your listening habits public like on a personal blog or on a dashboard.",
   "main": "index.js",
   "scripts": {
