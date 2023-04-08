@@ -30,12 +30,6 @@
 Getting started is easy, run:
 
 ```sh
-docker pull jbwhitcombe/spotapi:latest
-```
-
-And then to run the container you've built, run:
-
-```sh
 docker run -e SPOTIFY_ID="a_good_secret" -e SPOTIFY_SECRET="an_even_better_secret" -e SPOTIFY_REDIRECT_URI="https://your.awesome.website" jbwhitcombe/spotapi:latest
 ```
 
