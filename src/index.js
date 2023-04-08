@@ -32,11 +32,21 @@ const emit = (data) => {
             tracks: data.top_tracks
         }
     }
-    io.emit('refresh', filtered)
+    io.emit('update', filtered)
 }
 
 io.on('connection', function (socket) {
-    socket.emit('refresh', filtered);
+    
+    logger.info(`New connection from ${socket.handshake.address}`)
+    
+    socket.on('immediate_refresh_request', () => {
+        logger.info(`Immediate update request from ${socket.handshake.address}`)
+        socket.emit('update', filtered);
+    });
+
+    socket.on('disconnect', () => {
+        logger.info(`Disconnected ${socket.handshake.address}`)
+    });
 });
 
 // Instantiate the Spotify library

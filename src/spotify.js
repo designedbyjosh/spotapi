@@ -9,8 +9,8 @@ var top_tracks;
 var loop;
 
 // // Read the environment file
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 /*  
     A client ID and a client secret are required for usage of this library, 
@@ -53,9 +53,17 @@ const poll = (code) => {
                 .catch((err) => logger.error('Something went wrong retrieving top artists: ', err));
 
             // Get information about current playing song for signed in user
-            now_playing = await spotifyApi.getMyCurrentPlaybackState()
+            let now_playing_temp = await spotifyApi.getMyCurrentPlaybackState()
                 .then((data) => data.body)
                 .catch((err) => logger.error('Something went wrong retrieving now playing: ', err));
+
+            // Determine if history on currently playing track should be kept
+            if (!now_playing_temp.now_playing) {
+                now_playing = JSON.parse(JSON.stringify(now_playing_temp))
+            }
+            else {
+                logger.info("Not updating due to empty now playing object")
+            }
 
             publish({ now_playing, top_artists, top_tracks });
 
