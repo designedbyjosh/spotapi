@@ -30,13 +30,13 @@
 Getting started is easy, run:
 
 ```sh
-docker build . --tag spotapi:latest
+docker pull jbwhitcombe/spotapi:latest
 ```
 
 And then to run the container you've built, run:
 
 ```sh
-docker run -e SPOTIFY_ID="a_good_secret" -e SPOTIFY_SECRET="an_even_better_secret" -e SPOTIFY_REDIRECT_URI="https://your.awesome.website" spotapi:latest
+docker run -e SPOTIFY_ID="a_good_secret" -e SPOTIFY_SECRET="an_even_better_secret" -e SPOTIFY_REDIRECT_URI="https://your.awesome.website" jbwhitcombe/spotapi:latest
 ```
 
 You'll need to then either manually POST the code to /code with:
