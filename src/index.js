@@ -47,7 +47,7 @@ io.on('connection', function (socket) {
 // Instantiate the Spotify library
 spotify.instantiate(emit);
 
-app.post('/code', (req, res) => {
+app.get('/code', (req, res) => {
     if (req.query.code && req.query.code.length > 0) {
         spotify.poll(req.query.code)
         res.status(200).send('Received code')

@@ -33,13 +33,15 @@ Getting started is easy, run:
 docker run -e SPOTIFY_ID="a_good_secret" -e SPOTIFY_SECRET="an_even_better_secret" -e SPOTIFY_REDIRECT_URI="https://your.awesome.website" jbwhitcombe/spotapi:latest
 ```
 
-You'll need to then either manually POST the code to /code with:
+You'll need to then either manually GET* the code to /code with:
 
 ```sh
-curl --location --request POST 'localhost:80/code?code=$CODE'
+curl --location --request GET 'localhost:80/code?code=$CODE'
 ```
 
 Once you've completed the code transfer, you won't need to do this again until the service restarts.
+
+* We're using a GET instead of a more traditional POST to enable browser-based sharing of the code as requests are defaulted to GET, rather than relying on the terminal or Curl.
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
