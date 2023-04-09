@@ -25,8 +25,8 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 // Create the authorization URL
-logger.info(spotifyApi.createAuthorizeURL(['user-library-read', 'user-top-read', 'user-read-playback-state', 'user-read-currently-playing']))
-logger.info("Please POST the received code to /code to commence searching")
+logger.info(spotifyApi.createAuthorizeURL(['user-library-read', 'user-top-read', 'user-read-playback-state', 'user-read-currently-playing']));
+logger.info("Please POST the received code to /code to commence searching");
 
 const poll = (code) => {
 
@@ -60,7 +60,7 @@ const poll = (code) => {
 
             publish({ now_playing, top_artists, top_tracks });
 
-        }, process.env.REFRESH_RATE || 5000)
+        }, process.env.REFRESH_RATE || 5000);
 
         refresh_interval = setInterval(() => spotifyApi.refreshAccessToken()
             .then((data) => {
@@ -80,4 +80,4 @@ module.exports = {
         publish = cb;
     },
     poll
-}
+};

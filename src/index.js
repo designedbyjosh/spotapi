@@ -35,16 +35,17 @@ const emit = (data) => {
 
 io.on('connection', function (socket) {
     
-    logger.info(`New connection from ${socket.handshake.address}`)
+    logger.info(`New connection from ${socket.handshake.address}`);
     
     socket.on('immediate_refresh_request', () => {
-        logger.info(`Immediate update request from ${socket.handshake.address}`)
-        socket.emit('update', filtered);
+        logger.info(`Immediate update request from ${socket.handshake.address}`);
+        return filtered;
     });
 
     socket.on('disconnect', () => {
-        logger.info(`Disconnected ${socket.handshake.address}`)
+        logger.info(`Disconnected ${socket.handshake.address}`);
     });
+
 });
 
 // Instantiate the Spotify library
@@ -52,20 +53,20 @@ spotify.instantiate(emit);
 
 app.get('/code', (req, res) => {
     if (req.query.code && req.query.code.length > 0) {
-        spotify.poll(req.query.code)
-        res.status(200).send('Received code')
+        spotify.poll(req.query.code);
+        res.status(200).send('Received code');
     } else {
-        res.status(400).send('No code received')
+        res.status(400).send('No code received');
     }
 })
 
 app.get('/data', (req, res) => {
-    res.status(200).send(filtered)
+    res.status(200).send(filtered);
 })
 
 // Store the port to listen on
-const port = process.env.PORT || 80
+const port = process.env.PORT || 80;
 
 // Start listening to requests
 http.listen(port);
-logger.info(`Spotapi service started and listening to ${port}`)
+logger.info(`Spotapi service started and listening to ${port}`);
