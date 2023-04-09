@@ -1,5 +1,6 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 const logger = require('./logger')
+var fs = require("fs");
 
 // Cache of statistics
 var publish;
@@ -53,17 +54,9 @@ const poll = (code) => {
                 .catch((err) => logger.error('Something went wrong retrieving top artists: ', err));
 
             // Get information about current playing song for signed in user
-            let now_playing_temp = await spotifyApi.getMyCurrentPlaybackState()
+            now_playing = await spotifyApi.getMyCurrentPlaybackState()
                 .then((data) => data.body)
                 .catch((err) => logger.error('Something went wrong retrieving now playing: ', err));
-
-            // Determine if history on currently playing track should be kept
-            if (!now_playing_temp.now_playing) {
-                now_playing = JSON.parse(JSON.stringify(now_playing_temp))
-            }
-            else {
-                logger.info("Not updating due to empty now playing object")
-            }
 
             publish({ now_playing, top_artists, top_tracks });
 

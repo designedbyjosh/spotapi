@@ -1,38 +1,36 @@
-
 // Networking configuration
 const express = require('express');
 const app = express();
+
+// Generate a shared HTTP API server and WS server using Socket IO
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
     cors: {
         origin: '*'
     },
     path: "/ws"
-  })
-
-
+});
 
 // Custom logging library
-const logger = require('./logger')
+const logger = require('./logger');
 
 // Spotify library for filtering, retrieving and getting user data
-const spotify = require('./spotify')
+const spotify = require('./spotify');
+const { isNull } = require('util');
 
 // Hold onto the filtered data;
-var filtered;
+var filtered = {};
+
+// Accepts a key and safely attempts to override it in a target object
+// if the property exists in the source object
+const assignIfExists = (key, target, source) => {
+    target[key] = source[key] === null ? filtered[key] : source[key];
+}
 
 // Function to publish and emit requested data
 const emit = (data) => {
-    filtered = {
-        now_playing: data.now_playing.is_playing,
-        timestamp: data.now_playing.timestamp,
-        item: data.now_playing.item,
-        top: {
-            artists: data.top_artists,
-            tracks: data.top_tracks
-        }
-    }
-    io.emit('update', filtered)
+    Object.keys(data).map((key) => assignIfExists(key, filtered, data));
+    io.emit('update', filtered);
 }
 
 io.on('connection', function (socket) {
