@@ -46,21 +46,21 @@ const poll = (code) => {
             // Get information about the top tracks for the signed in user
             top_tracks = await spotifyApi.getMyTopTracks()
                 .then((data) => data.body)
-                .catch((err) => logger.error('Something went wrong retrieving top tracks: ', err));
+                .catch((err) => {logger.error('Something went wrong retrieving top tracks, code: ', err.statusCode)});
 
             // Get information about the top artists for the signed in user
             top_artists = await spotifyApi.getMyTopArtists()
                 .then((data) => data.body)
-                .catch((err) => logger.error('Something went wrong retrieving top artists: ', err));
+                .catch((err) => {logger.error('Something went wrong retrieving top artists, code: ', err.statusCode)});
 
             // Get information about current playing song for signed in user
             now_playing = await spotifyApi.getMyCurrentPlaybackState()
                 .then((data) => data.body)
-                .catch((err) => logger.error('Something went wrong retrieving now playing: ', err));
+                .catch((err) => {logger.error('Something went wrong retrieving now playing, code: ', err.statusCode)});
 
             publish({ now_playing, top_artists, top_tracks });
 
-        }, process.env.REFRESH_RATE || 5000);
+        }, process.env.REFRESH_RATE || 10000);
 
         refresh_interval = setInterval(() => spotifyApi.refreshAccessToken()
             .then((data) => {
