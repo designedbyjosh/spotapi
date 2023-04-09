@@ -16,7 +16,6 @@ const logger = require('./logger');
 
 // Spotify library for filtering, retrieving and getting user data
 const spotify = require('./spotify');
-const { isNull } = require('util');
 
 // Hold onto the filtered data;
 var filtered = {};
@@ -37,9 +36,9 @@ io.on('connection', function (socket) {
     
     logger.info(`New connection from ${socket.handshake.address}`);
     
-    socket.on('immediate_refresh_request', () => {
+    socket.on('immediate_refresh_request', (cb) => {
         logger.info(`Immediate update request from ${socket.handshake.address}`);
-        return filtered;
+        cb(filtered)
     });
 
     socket.on('disconnect', () => {
